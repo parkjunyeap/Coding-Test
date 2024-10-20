@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+class Solution {
+public static void main(String args[]) throws Exception {
+Scanner sc = new Scanner([System.in](http://system.in/));
+
+```
+    for (int test_case = 1; test_case <= 10; test_case++) {  // 10개의 테스트 케이스
+        int building = sc.nextInt();  // 건물 개수
+        int[] heights = new int[building];  // 건물 높이 배열
+
+        for (int i = 0; i < building; i++) {
+            heights[i] = sc.nextInt();
+        }
+
+        int sum = 0;  // 조망권이 확보된 세대의 수
+
+        // 건물 수가 5개 미만일 경우 조망권이 확보될 수 없으므로 바로 0 출력
+        if (building < 5) {
+            System.out.println("#" + test_case + " " + 0);
+            continue;
+        }
+
+        // 각 건물에 대해 좌우 2칸 확인
+        for (int i = 2; i < building - 2; i++) {
+            // 현재 건물 양쪽 2칸씩의 건물들 중에서 가장 높은 건물을 찾음
+            int maxLeft = Math.max(heights[i - 1], heights[i - 2]);
+            int maxRight = Math.max(heights[i + 1], heights[i + 2]);
+            int maxNeighbor = Math.max(maxLeft, maxRight);
+
+            // 현재 건물이 양쪽 두 칸의 건물들보다 높은 경우에만 조망권 확보
+            if (heights[i] > maxNeighbor) {
+                sum += heights[i] - maxNeighbor;
+            }
+        }
+
+        // 결과 출력
+        System.out.println("#" + test_case + " " + sum);
+    }
+
+    sc.close();
+}
+
+```
+
+}
