@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String [] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int N = Integer.parseInt(br.readLine());
+		int arr[][] = new int [N][2];
+		
+		for(int i=0; i<N; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine()," ");
+			
+			arr[i][0] =Integer.parseInt(st.nextToken());
+			arr[i][1] =Integer.parseInt(st.nextToken());
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		// 일단 정렬 
+		for (int i = 0; i<N; i++) {	// 현재 비교하고자하는 첫번째 변수
+			int rank = 1;
+			for (int j = 0 ; j<N; j++) {	// 이제 비교할 첫번째 변수 제외 모두. 
+				if(i==j) {
+					continue;	// 자기 자신이랑 비교할 필요가 없고, 
+				} 
+				else if (arr[i][0] < arr[j][0] && arr[i][1] < arr[j][1]) { // 둘다 자기보다 높을때 랭크가 낮아지면된다, (커지면 낮아지는거)
+					rank++;
+				}
+				
+			}
+			
+			sb.append(rank).append(' ');
+		}
+		System.out.println(sb);
+	}
+}
