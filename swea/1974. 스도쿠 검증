@@ -1,0 +1,59 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+    	Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		int[][] board = new int[9][9];
+		for (int tc = 1; tc <= T; tc++) {
+			int ans = 1;
+			for (int i = 0; i < 9; i++) {
+				for (int j = 0; j < 9; j++) {
+					board[i][j] = sc.nextInt();
+				}				
+			}
+			
+			// 위까지가 초기화 
+			
+			for (int i=0; i<9; i++) {
+				int rowSum = 0;
+				int colSum = 0;
+				for(int j=0;j <9; j++) {
+					rowSum += board[i][j];
+					colSum += board[j][i];
+				}
+				
+				if(rowSum != 45 || colSum != 45) { // 다 더했을 떄 이게아니면 중복
+					ans =0;
+					break;
+				}
+			}
+			
+			
+			for(int i =0; i<9; i+=3) {
+				for(int j =0; j<9; j+=3) {
+					int gridSum = 0;
+					for(int x =0; x<3; x++) {
+						for(int y = 0; y<3; y++) {
+							gridSum += board[i+x][j+y];
+							
+						}
+					}
+					if(gridSum != 45) {
+						ans = 0;
+                        break;
+					}
+				}
+               // if (ans == 0) break;	//
+			}
+			System.out.println("#" + tc + " " + ans);
+			
+		}
+     	
+        sc.close();   
+    }
+}
