@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Solution {
+	static int N;
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int T;
+		T=sc.nextInt();
+		/*
+		   여러 개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+		*/
+
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+            N = sc.nextInt();	// 배열 크기 
+            int [][] board = new int [N][N]; 
+            
+            for(int i =0; i<N; i++) {
+            	for(int j =0; j<N; j++) {
+                	board[i][j] = sc.nextInt();
+                }
+            }
+            // 초기화 
+            
+            int [][] rotate_90 = rotation(board);
+            int [][] rotate_180 = rotation(rotate_90);
+            int [][] rotate_270 = rotation(rotate_180);
+            
+            System.out.println("#" + test_case );
+            for(int i=0; i<N; i++) {
+            	for(int j=0; j<N; j++) {	 
+            		System.out.print(rotate_90[i][j]); // 하나의 배열에 한줄 출력해야함.
+            	}
+            	System.out.print(" ");
+            	
+            	for(int j=0; j<N; j++) {	 
+            		System.out.print(rotate_180[i][j]); // 하나의 배열에 한줄 출력해야함.
+            	}
+            	System.out.print(" ");
+            	
+            	for(int j=0; j<N; j++) {	 
+            		System.out.print(rotate_270[i][j]); // 하나의 배열에 한줄 출력해야함.
+            	}
+            	
+            	System.out.println();
+            }
+		}
+	}
+	
+	
+	public static int [][] rotation(int [][] arr) {
+		int [][] result = new int [N][N]; // 리턴 배열 선언
+		
+		for(int i= 0 ;i< N; i++) {
+			for(int j =0; j<N ; j++) {
+				result[i][j] = arr[N -1 - j][i];
+			}
+		}
+		return result;	// 90 도회전
+	}
+}
