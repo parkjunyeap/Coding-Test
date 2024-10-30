@@ -1,0 +1,56 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+	static int N;
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T;
+		T= Integer.parseInt(br.readLine().trim());
+		// 월이 같다면 일 만 - 해주고 +1 
+		// 월 다르면 다른월들만큼 월 - 월 했을 때 3월 11일 ~ 6월 20일 
+		// 4,5는 30일 31일 더하고 / 이전 일 3월이 31일까지니까 31- 11 + 1 = 21일
+		// 다음 일은 20일이니까 그대로 더해주면됨. 
+		
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+			
+			
+			int [] ilsu = {0,31,28,31,30,31,30,31,31,30,31,30,31};	// 인덱스 0 은 0
+			// 1부터 12까지있음.
+			StringTokenizer st = new StringTokenizer(br.readLine() , " ");
+			
+			int beforeMonth = Integer.parseInt(st.nextToken()); 
+			int beforeDay = Integer.parseInt(st.nextToken()); 
+			
+			int afterMonth = Integer.parseInt(st.nextToken()); 
+			int afterDay = Integer.parseInt(st.nextToken()); 
+			
+			int result = 0;
+			
+			if(beforeMonth == afterMonth) {	// 두 월이 같으면 간단하게
+				result = afterDay - beforeDay + 1;
+			} else {
+
+				for(int i = beforeMonth ; i<afterMonth; i++) { //i 가 3이면 그다음 4부터
+					// 일단 처음 3월 11일 , 4월 20일이라고치면 
+					// 3시작해서 3으로끝나네
+					if(i == beforeMonth) { // 시작월 에 지난 거 계산 3이면 0,1,2
+						result += ilsu[beforeMonth] - beforeDay +1;
+					} else {
+						result += ilsu[i]; // 시작월 아니면 마지막월 전까지 다 더함.
+					}
+
+				}
+				// // 마지막월은 구냥더함.
+				result += afterDay; // 후의 날이랑 전의날 
+				
+				// + 가없었네요,ㅇ,,
+			}
+			
+			System.out.println("#" + test_case + " " + result);
+		}
+
+	}
+}
