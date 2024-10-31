@@ -1,0 +1,86 @@
+
+import java.util.Scanner;
+import java.io.FileInputStream;
+
+/*
+   사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
+   이러한 상황에서도 동일하게 java Solution 명령으로 프로그램을 수행해볼 수 있습니다.
+ */
+class Solution
+{
+	public static void main(String args[]) throws Exception
+	{
+		
+		Scanner sc = new Scanner(System.in);
+		int T;
+		T=sc.nextInt();
+		
+
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+            int aSize = sc.nextInt();
+            int bSize = sc.nextInt();
+            
+            int [] a = new int[aSize];
+            int [] b = new int[bSize];
+            
+            for(int i=0; i<aSize; i++) {
+            	a[i] = sc.nextInt();
+            }
+            for(int j =0; j<bSize; j++) {
+            	b[j] = sc.nextInt();
+            }
+            
+            int sum = 0; 
+            // 초기화하고 
+            // 더 작은쪽이 움직이면서 큰쪽 인덱스가 1씩올라가면서 sum 한거 최대 구하기
+            if(bSize>aSize) { // a인덱스올라감
+            	int temp = aSize; aSize = bSize; bSize = temp;	// 스왑
+            	int[] tempArr = a; a = b; b = tempArr;
+            	
+            	sum = 0;
+            	
+            	
+            	for(int i =0; i<=Math.abs(aSize - bSize); i++ ) { // 큰쪽- 작은쪽 
+                    int currentSum = 0;
+                    for(int j =0; j <bSize ; j++) {	// 3번반복
+                    	currentSum += b[j] * a[i+j] ;		// j 처음부터 b는 처음부터 다  // a는 i+ 한만큼
+                    }
+                    // 다 끝나고 이게 더크면 
+                    if(currentSum > sum) {
+                    	sum = currentSum; 
+                    }
+                	
+                }
+//            }else if( aSize < bSize) {
+//            	sum =0 ;
+//            	for(int i =0; i<=bSize - aSize; i++ ) { // 3 < 5 0,1,2 3번돌아야하네,, 
+//                    int currentSum = 0;
+//                    for(int j =0; j <aSize ; j++) {	// 3번반복
+//                    	currentSum += a[j] * b[i+j] ; 
+//                    }
+//                    
+//                    if(currentSum > sum) {
+//                    	sum = currentSum; 
+//                    }
+//                }
+//            } else {
+//            	sum=0;
+//            	// 둘이 같을 때는 
+//                for(int i =0; i<=aSize; i++ ) {
+//                    sum += a[i] * b[i] ; 
+//                }
+//            } 
+           
+        
+        	System.out.println("#" + test_case + " " + sum);
+        }
+			/////////////////////////////////////////////////////////////////////////////////////////////
+			/*
+				 이 부분에 여러분의 알고리즘 구현이 들어갑니다.
+			 */
+			/////////////////////////////////////////////////////////////////////////////////////////////
+
+		}
+	}
+	}
